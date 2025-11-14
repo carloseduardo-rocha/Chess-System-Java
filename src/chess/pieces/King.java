@@ -17,7 +17,7 @@ public class King extends ChessPiece {
 
 	@Override
 	public String toString() {
-		return "K";
+		return getColor() == Color.WHITE ? "\u2654" : "\u265A";
 	}
 
 	private boolean canMove(Position position) {
@@ -94,7 +94,6 @@ public class King extends ChessPiece {
 				Position p2 = new Position(position.getRow(), position.getColumn() + 2);
 				if (getBoard().piece(p1) == null && getBoard().piece(p2) == null) {
 					mat[position.getRow()][position.getColumn() + 2] = true;
-
 				}
 			}
 

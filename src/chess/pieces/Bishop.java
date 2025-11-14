@@ -13,7 +13,7 @@ public class Bishop extends ChessPiece {
 
 	@Override
 	public String toString() {
-		return "B";
+		return getColor() == Color.WHITE ? "\u2657" : "\u265D";
 	}
 
 	@Override
