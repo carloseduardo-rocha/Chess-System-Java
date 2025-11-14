@@ -19,7 +19,6 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<>();
 
-		// Tela de abertura
 		printWelcomeScreen();
 		sc.nextLine();
 
@@ -30,7 +29,6 @@ public class Program {
 				UI.printMach(chessMatch, captured);
 				System.out.println();
 
-				// Source com emoji
 				System.out.print("🎯 Source: ");
 				ChessPosition source = UI.readChessPosition(sc);
 
@@ -40,7 +38,6 @@ public class Program {
 				UI.printBoard(chessMatch.getPieces(), possibleMoves);
 				System.out.println();
 
-				// Target com emoji
 				System.out.print("🎯 Target: ");
 				ChessPosition target = UI.readChessPosition(sc);
 
@@ -49,23 +46,22 @@ public class Program {
 				if (capturedPiece != null) {
 					captured.add(capturedPiece);
 					System.out.println("💥 Piece captured: " + capturedPiece);
-					sc.nextLine(); // Pausa dramática
+					sc.nextLine();
 				}
 
 				if (chessMatch.getPromoted() != null) {
 					System.out.print("👑 Enter piece for promotion (B | N | R | Q): ");
 					String type = sc.nextLine().toUpperCase();
 					while (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q")) {
-						System.out.println("❌ Invalid value! Enter piece for promotion [B | N | R | Q]");
+						System.out.println("❌ Invalid value! Enter piece for promotion (B | N | R | Q)");
 						type = sc.nextLine().toUpperCase();
 					}
 					chessMatch.replacePromotedPiece(type);
 				}
 
-				// Mensagem de check
 				if (chessMatch.getCheck()) {
 					System.out.println("⚡ CHECK!");
-					sc.nextLine(); // Pausa dramática
+					sc.nextLine();
 				}
 			}
 			catch (ChessException e) {
@@ -78,14 +74,22 @@ public class Program {
 			}
 		}
 
-		// Tela final
+		// End screen
 		UI.clearScreen();
-		printHeader();
+		System.out.println("\n");
+		System.out.println("    ╔══════════════════════════════╗");
+		System.out.println("    ║          🏁 GAME END         ║");
+		System.out.println("    ╠══════════════════════════════╣");
+		System.out.println("    ║         🎉 CHECKMATE!        ║");
+		System.out.println("    ║                              ║");
+		System.out.println("    ║     🏆 WINNER: " + chessMatch.getCurrentPlayer() + " 🏆      ║");
+		System.out.println("    ║     📊 Turns: " + chessMatch.getTurn() + "             ║");
+		System.out.println("    ║                              ║");
+		System.out.println("    ║    Thanks for playing! 👑    ║");
+		System.out.println("    ╚══════════════════════════════╝");
+		System.out.println("\n");
+
 		UI.printMach(chessMatch, captured);
-		System.out.println();
-		System.out.println("🎉 CHECKMATE! 🎉");
-		System.out.println("🏆 Winner: " + chessMatch.getCurrentPlayer());
-		System.out.println("\nThanks for playing! 👑");
 
 		sc.close();
 	}
